@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Your AI Dream Team? | Wright Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #396a6b;
+            --coral: #f17a51;
+            --sage: #a0b798;
+            --mint: #97d3b4;
+            --soft-teal: #d4d6cd;
+            --cream: #f2f3f0;
+            --blush: #fbd7cb;
+            --soft-sage: #e3e9e0;
+            --soft-mint: #e0f2e9;
+            --gray: #b3b3b3;
+            --dark: #000000;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--soft-mint) 50%, var(--soft-sage) 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 32px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--teal);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(57, 106, 107, 0.15);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--teal), var(--mint));
+            border-radius: 100px;
+            transition: width 0.5s ease;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 4px 24px rgba(57, 106, 107, 0.08);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--soft-mint);
+            color: var(--teal);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .question-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .question-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 24px;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            background: var(--soft-mint);
+            border-color: var(--mint);
+        }
+
+        .option.selected {
+            background: var(--soft-mint);
+            border-color: var(--teal);
+        }
+
+        .option-radio {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--gray);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            margin-top: 2px;
+        }
+
+        .option.selected .option-radio {
+            border-color: var(--teal);
+            background: var(--teal);
+        }
+
+        .option.selected .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 50%;
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .option-emoji {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        /* Buttons */
+        .btn-container {
+            margin-top: auto;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--coral);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #e06a42;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(241, 122, 81, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--teal);
+            border: 2px solid var(--soft-teal);
+            flex: 0;
+            padding: 16px 24px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--teal);
+            background: var(--soft-mint);
+        }
+
+        /* Welcome Screen */
+        .welcome-content {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-emoji {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 32px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quiz-promise {
+            background: var(--soft-mint);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .quiz-promise-title {
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 16px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .promise-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .promise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Results Screen */
+        .results-container {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .results-emoji {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        .results-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .results-subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .dream-team-section {
+            margin-bottom: 24px;
+        }
+
+        .dream-team-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .team-member {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .team-member-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .team-member-emoji {
+            font-size: 28px;
+        }
+
+        .team-member-name {
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        .team-member-desc {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .reality-check {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--soft-mint) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .reality-check-title {
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .reality-check-content {
+            font-size: 15px;
+            color: #333;
+        }
+
+        .possibility-box {
+            background: var(--teal);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .possibility-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+        .possibility-list {
+            list-style: none;
+        }
+
+        .possibility-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .possibility-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .workshop-section {
+            background: var(--white);
+            border: 2px solid var(--soft-mint);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .workshop-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .workshop-format {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .format-card {
+            flex: 1;
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .format-emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .format-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 4px;
+        }
+
+        .format-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .format-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .workshop-includes {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .workshop-includes li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .testimonial {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            font-size: 48px;
+            color: var(--mint);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            font-style: italic;
+            color: #444;
+            padding-left: 32px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-author {
+            font-size: 13px;
+            color: var(--teal);
+            font-weight: 600;
+            padding-left: 32px;
+        }
+
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .cta-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .price-tag {
+            font-size: 14px;
+            color: var(--teal);
+            margin-top: 16px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .card {
+                padding: 32px 24px;
+                border-radius: 20px;
+            }
+
+            .question-title {
+                font-size: 22px;
+            }
+
+            .welcome-title {
+                font-size: 26px;
+            }
+
+            .option {
+                padding: 16px 20px;
+            }
+
+            .btn-container {
+                flex-direction: column-reverse;
+            }
+
+            .btn-secondary {
+                flex: 1;
+            }
+
+            .workshop-format {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-text">
+                <span id="progressLabel">Quick quiz</span>
+                <span id="progressCount"></span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            <!-- Welcome Screen -->
+            <div id="welcomeScreen" class="welcome-content">
+                <div class="welcome-emoji">🤖💭</div>
+                <h1 class="welcome-title">What's Your AI Dream Team?</h1>
+                <p class="welcome-subtitle">Take this 60-second quiz to discover which AI assistants would make the biggest difference in YOUR business.</p>
+
+                <div class="quiz-promise">
+                    <div class="quiz-promise-title">In 5 questions, you'll discover:</div>
+                    <div class="promise-item">
+                        <span>🤖</span>
+                        <span>Your personalised AI Dream Team (3-4 assistants matched to you)</span>
+                    </div>
+                    <div class="promise-item">
+                        <span>💡</span>
+                        <span>The #1 thing that's been holding you back with AI</span>
+                    </div>
+                    <div class="promise-item">
+                        <span>🤯</span>
+                        <span>What's actually possible now (prepare to be surprised)</span>
+                    </div>
+                </div>
+
+                <div class="btn-container" style="justify-content: center;">
+                    <button class="btn btn-primary" onclick="startQuiz()" style="flex: 0; min-width: 220px;">Take the Quiz →</button>
+                </div>
+            </div>
+
+            <!-- Question Screens -->
+            <div id="questionScreen" class="hidden">
+                <div class="question-label" id="questionLabel"></div>
+                <h2 class="question-title" id="questionTitle"></h2>
+                <p class="question-subtitle" id="questionSubtitle"></p>
+
+                <div class="options" id="optionsContainer"></div>
+
+                <div class="btn-container">
+                    <button class="btn btn-secondary hidden" id="backBtn" onclick="previousQuestion()">← Back</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Continue →</button>
+                </div>
+            </div>
+
+            <!-- Email Capture Screen -->
+            <div id="emailScreen" class="hidden">
+                <div class="question-label">✨ Almost there!</div>
+                <h2 class="question-title">Where should I send your results?</h2>
+                <p class="question-subtitle">Enter your email to see your personalised AI Dream Team + get a free resource to help you get started.</p>
+
+                <div style="margin-bottom: 32px;">
+                    <input type="email" id="emailInput" placeholder="your@email.com" style="
+                        width: 100%;
+                        padding: 16px 20px;
+                        border: 2px solid #d4d6cd;
+                        border-radius: 12px;
+                        font-size: 16px;
+                        font-family: inherit;
+                        transition: all 0.2s ease;
+                    " oninput="validateEmail()" onfocus="this.style.borderColor='#396a6b'; this.style.boxShadow='0 0 0 4px rgba(57, 106, 107, 0.1)';" onblur="this.style.borderColor='#d4d6cd'; this.style.boxShadow='none';">
+                    <p id="emailError" style="color: #f17a51; font-size: 14px; margin-top: 8px; display: none;">Please enter a valid email address</p>
+                </div>
+
+                <p style="font-size: 13px; color: #666; margin-bottom: 24px; text-align: center;">No spam, ever. Just helpful AI stuff.</p>
+
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="backToQuestions()">← Back</button>
+                    <button class="btn btn-primary" id="showResultsBtn" onclick="submitEmail()" disabled>Show My Dream Team →</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="hidden results-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Questions - focused on pain points + possibility reveal
+        const questions = [
+            {
+                id: 'ai-reality',
+                label: 'Your AI reality',
+                title: "Be real — what's your current relationship with AI?",
+                subtitle: "No judgement. Most people feel this way.",
+                type: 'single',
+                options: [
+                    { value: 'avoiding', label: "I've been avoiding it", description: "I know I should be using it but it feels overwhelming", emoji: '😬' },
+                    { value: 'disappointed', label: "I've tried, but... meh", description: "The outputs are generic and don't really help", emoji: '😐' },
+                    { value: 'surface', label: "I use it, but not well", description: "I know I'm only scratching the surface", emoji: '🤔' },
+                    { value: 'ready', label: "Ready to go deeper", description: "Show me what's actually possible", emoji: '🔥' }
+                ]
+            },
+            {
+                id: 'biggest-drain',
+                label: 'Your time drain',
+                title: "What eats up way too much of your week?",
+                subtitle: "Pick the one that makes you sigh the loudest.",
+                type: 'single',
+                options: [
+                    { value: 'content', label: 'Content creation', description: "The never-ending hamster wheel of posts, emails, blogs", emoji: '📝' },
+                    { value: 'client-admin', label: 'Client admin', description: "Onboarding, proposals, follow-ups, keeping track of it all", emoji: '📋' },
+                    { value: 'marketing', label: 'Marketing strategy', description: "Figuring out what to focus on, planning, lead gen", emoji: '📊' },
+                    { value: 'everything', label: 'Honestly... all of it', description: "I'm drowning and everything takes forever", emoji: '🌊' }
+                ]
+            },
+            {
+                id: 'ai-frustration',
+                label: 'Your frustration',
+                title: "What's frustrated you most about AI so far?",
+                subtitle: "These are the most common ones I hear.",
+                type: 'single',
+                options: [
+                    { value: 'robotic', label: "It sounds like a robot", description: "Everything it writes is generic and definitely not my voice", emoji: '🤖' },
+                    { value: 'prompts', label: "I never know what to ask", description: "I spend ages on prompts and still don't get what I need", emoji: '❓' },
+                    { value: 'scattered', label: "Nothing sticks", description: "I try tools, get excited, then forget about them", emoji: '🌀' },
+                    { value: 'missing', label: "I'm missing something", description: "I know there's more but I don't know what I don't know", emoji: '🤷' }
+                ]
+            },
+            {
+                id: 'dream-scenario',
+                label: 'Your dream scenario',
+                title: "If AI worked perfectly for you, what would change?",
+                subtitle: "Dream big for a sec.",
+                type: 'single',
+                options: [
+                    { value: 'hours-back', label: "I'd get hours back", description: "Repetitive tasks handled, more time for what matters", emoji: '⏰' },
+                    { value: 'content-flows', label: 'Content would flow', description: "No more blank page paralysis — ideas to posts, easily", emoji: '✍️' },
+                    { value: 'thinking-partner', label: "I'd have a thinking partner", description: "Someone to bounce ideas off, pressure-test decisions", emoji: '🧠' },
+                    { value: 'grow-business', label: 'My business would grow', description: "Better leads, smoother client experience, scale what works", emoji: '📈' }
+                ]
+            },
+            {
+                id: 'mind-blown',
+                label: 'Surprise factor',
+                title: "What would blow your mind if AI could do it?",
+                subtitle: "Some of these are actually possible now...",
+                type: 'single',
+                options: [
+                    { value: 'log-in', label: 'Log into my apps and DO stuff', description: "Pull analytics, update spreadsheets, run reports automatically", emoji: '🤖' },
+                    { value: 'remember', label: 'Remember everything about my biz', description: "Know my offers, clients, voice — without re-explaining every time", emoji: '🧠' },
+                    { value: 'lead-magnet', label: 'Create a lead magnet that works', description: "A quiz or audit MY audience would actually take", emoji: '🧲' },
+                    { value: 'autopilot', label: 'Run tasks on autopilot', description: "Weekly reports, content ideas, check-ins — without me", emoji: '⏰' }
+                ]
+            }
+        ];
+
+        // AI Team Members
+        const teamMembers = {
+            contentCreator: {
+                emoji: '✍️',
+                name: 'Content Creator',
+                description: "Creates on-brand posts, emails, and content in YOUR voice — trained on how you actually talk."
+            },
+            businessAdvisor: {
+                emoji: '🧠',
+                name: 'Business Advisor',
+                description: "Your strategic thinking partner. Helps you make decisions, pressure-test ideas, see blind spots."
+            },
+            emailMarketer: {
+                emoji: '📧',
+                name: 'Email Marketer',
+                description: "Newsletters, welcome sequences, nurture emails — all sounding like you wrote them."
+            },
+            clientOnboarding: {
+                emoji: '🤝',
+                name: 'Client Onboarding Assistant',
+                description: "Walks new clients through intake, creates welcome docs, handles the admin you dread."
+            },
+            cmo: {
+                emoji: '📊',
+                name: 'Chief Marketing Officer',
+                description: "Reviews your marketing strategy, identifies gaps, helps you prioritise what to focus on."
+            },
+            leadMagnetGPT: {
+                emoji: '🧲',
+                name: 'Lead Magnet GPT',
+                description: "A quiz, audit, or assessment YOUR audience can use — generates leads while you sleep."
+            },
+            sopCreator: {
+                emoji: '📋',
+                name: 'SOP Creator',
+                description: "Record your process once → get step-by-step SOPs you can hand to team or AI agents."
+            },
+            aiAgent: {
+                emoji: '🤖',
+                name: 'AI Agent',
+                description: "Logs into your apps, pulls data, runs reports, updates spreadsheets — on autopilot."
+            }
+        };
+
+        // State
+        let currentQuestion = -1;
+        let answers = {};
+
+        function startQuiz() {
+            currentQuestion = 0;
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            const totalQuestions = questions.length;
+
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressLabel').textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
+            document.getElementById('progressCount').textContent = '';
+
+            document.getElementById('questionLabel').innerHTML = `✨ ${question.label}`;
+            document.getElementById('questionTitle').textContent = question.title;
+            document.getElementById('questionSubtitle').textContent = question.subtitle;
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            const selectedValue = answers[question.id];
+
+            optionsContainer.innerHTML = question.options.map(option => `
+                <div class="option ${selectedValue === option.value ? 'selected' : ''}"
+                     onclick="selectOption('${option.value}')">
+                    <div class="option-radio"></div>
+                    <div class="option-content">
+                        <div class="option-label">${option.label}</div>
+                        <div class="option-description">${option.description}</div>
+                    </div>
+                    <div class="option-emoji">${option.emoji}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('backBtn').classList.toggle('hidden', currentQuestion === 0);
+            document.getElementById('nextBtn').disabled = !answers[question.id];
+            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? 'See My Dream Team →' : 'Continue →';
+        }
+
+        function selectOption(value) {
+            const question = questions[currentQuestion];
+            answers[question.id] = value;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                const optValue = opt.getAttribute('onclick').match(/'([^']+)'/)[1];
+                opt.classList.toggle('selected', optValue === value);
+            });
+
+            document.getElementById('nextBtn').disabled = false;
+
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    nextQuestion();
+                }
+            }, 300);
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                window.scrollTo(0, 0);
+            } else {
+                showEmailCapture();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showEmailCapture() {
+            document.getElementById('questionScreen').classList.add('hidden');
+            document.getElementById('emailScreen').classList.remove('hidden');
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressLabel').textContent = 'One more step';
+            document.getElementById('progressCount').textContent = '';
+            window.scrollTo(0, 0);
+        }
+
+        function backToQuestions() {
+            document.getElementById('emailScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('emailInput').value;
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            document.getElementById('showResultsBtn').disabled = !isValid;
+            document.getElementById('emailError').style.display = 'none';
+            return isValid;
+        }
+
+        function submitEmail() {
+            const email = document.getElementById('emailInput').value;
+            if (!validateEmail()) {
+                document.getElementById('emailError').style.display = 'block';
+                return;
+            }
+            userEmail = email;
+            showResults();
+        }
+
+        // Store user email
+        let userEmail = '';
+
+        function calculateDreamTeam() {
+            let team = [];
+
+            // Always include content creator and business advisor as foundation
+            team.push('contentCreator');
+            team.push('businessAdvisor');
+
+            // Based on biggest drain
+            if (answers['biggest-drain'] === 'client-admin') {
+                team.push('clientOnboarding');
+            } else if (answers['biggest-drain'] === 'marketing') {
+                team.push('cmo');
+            } else if (answers['biggest-drain'] === 'content') {
+                team.push('emailMarketer');
+            }
+
+            // Based on mind-blown question
+            if (answers['mind-blown'] === 'log-in' || answers['mind-blown'] === 'autopilot') {
+                team.push('aiAgent');
+            } else if (answers['mind-blown'] === 'lead-magnet') {
+                team.push('leadMagnetGPT');
+            } else if (answers['mind-blown'] === 'remember') {
+                // Business advisor already covers this
+            }
+
+            // Ensure we have 3-4 team members
+            team = [...new Set(team)];
+
+            if (team.length < 3) {
+                if (!team.includes('emailMarketer')) team.push('emailMarketer');
+            }
+
+            return team.slice(0, 4);
+        }
+
+        function getRealityCheck() {
+            const frustration = answers['ai-frustration'];
+            const reality = answers['ai-reality'];
+
+            if (frustration === 'robotic') {
+                return {
+                    title: "💡 Here's why AI sounds robotic for you",
+                    content: "AI doesn't know you yet. It's writing generic content because it has no idea about your voice, your audience, or your business. Once you train it properly? Completely different story. That's what the workshop teaches — how to make AI actually sound like YOU."
+                };
+            }
+
+            if (frustration === 'prompts') {
+                return {
+                    title: "💡 The prompting problem isn't you",
+                    content: "You're not bad at prompting — you just don't have the right frameworks yet. Great prompts aren't about magic words. They're about structure. In the workshop, you'll learn scaffolds that make AI actually useful, not frustrating."
+                };
+            }
+
+            if (frustration === 'scattered' || frustration === 'missing') {
+                return {
+                    title: "💡 You're not behind — you're at the perfect starting point",
+                    content: "Most people dabble for months before figuring out what actually works. The workshop skips all that. You'll build real AI assistants that solve real problems in your business — not just play around with prompts."
+                };
+            }
+
+            if (reality === 'avoiding') {
+                return {
+                    title: "💡 Good news: you're not actually behind",
+                    content: "AI is moving so fast that even people who started last year are learning new things. The workshop is designed for exactly where you're at — we'll get you caught up and building in one session."
+                };
+            }
+
+            return {
+                title: "💡 You're ready for the next level",
+                content: "You've got the basics. Now it's time to build systems that actually work — AI assistants trained on YOUR business that you'll use every day, not just when you remember."
+            };
+        }
+
+        function getPossibilities() {
+            const mindBlown = answers['mind-blown'];
+
+            let possibilities = [
+                "Build GPTs trained on YOUR voice that write content that actually sounds like you",
+                "Create a Business Advisor that knows your offers, audience, and goals inside out"
+            ];
+
+            if (mindBlown === 'log-in' || mindBlown === 'autopilot') {
+                possibilities.push("Set up AI Agents that log into your apps and run tasks on autopilot");
+                possibilities.push("Schedule recurring AI tasks — weekly reports, content ideas, check-ins — without lifting a finger");
+            } else {
+                possibilities.push("Connect AI to your calendar, email, and files so it has context");
+                possibilities.push("Schedule recurring AI tasks that run automatically");
+            }
+
+            if (mindBlown === 'lead-magnet') {
+                possibilities.push("Create a Lead Magnet GPT — a quiz or audit YOUR audience can use");
+            }
+
+            return possibilities;
+        }
+
+        // CONFIGURATION - Update this with your n8n webhook URL
+        const N8N_WEBHOOK_URL = 'https://n8n-wrightmode-u50335.vm.elestio.app/webhook/ai-dream-team-lead-quiz';
+
+        async function sendToN8N(data) {
+            try {
+                await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+            } catch (error) {
+                console.log('Webhook error:', error);
+                // Continue anyway - don't block the user experience
+            }
+        }
+
+        // Map frustration to Flodesk segment
+        function getFrustrationSegment() {
+            const frustrationMap = {
+                'robotic': 'quiz-pain-robotic',
+                'prompts': 'quiz-pain-prompts',
+                'scattered': 'quiz-pain-scattered',
+                'missing': 'quiz-pain-missing'
+            };
+            return frustrationMap[answers['ai-frustration']] || 'quiz-pain-missing';
+        }
+
+        async function showResults() {
+            document.getElementById('emailScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.add('hidden');
+            document.getElementById('progressContainer').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            const team = calculateDreamTeam();
+            const realityCheck = getRealityCheck();
+            const possibilities = getPossibilities();
+
+            // Build Flodesk segments array
+            const flodeskSegments = [
+                'ai-dream-team-lead',
+                getFrustrationSegment()
+            ];
+
+            // Send data to n8n
+            const quizData = {
+                quiz_type: 'pre_purchase_lead',
+                timestamp: new Date().toISOString(),
+                email: userEmail,
+                flodesk_segments: flodeskSegments,
+                answers: answers,
+                dream_team: team.map(id => teamMembers[id].name),
+                dream_team_ids: team,
+                ai_reality: answers['ai-reality'],
+                biggest_drain: answers['biggest-drain'],
+                ai_frustration: answers['ai-frustration'],
+                dream_scenario: answers['dream-scenario'],
+                mind_blown: answers['mind-blown']
+            };
+
+            sendToN8N(quizData);
+
+            document.getElementById('resultsScreen').innerHTML = `
+                <div class="results-header">
+                    <div class="results-emoji">🎉</div>
+                    <h2 class="results-title">Your AI Dream Team</h2>
+                    <p class="results-subtitle">Based on your answers, here are the AI assistants that would make the biggest impact on your business.</p>
+                </div>
+
+                <div class="dream-team-section">
+                    <div class="dream-team-title">🤖 Your personalised lineup</div>
+                    ${team.map(memberId => {
+                        const member = teamMembers[memberId];
+                        return `
+                            <div class="team-member">
+                                <div class="team-member-header">
+                                    <span class="team-member-emoji">${member.emoji}</span>
+                                    <span class="team-member-name">${member.name}</span>
+                                </div>
+                                <p class="team-member-desc">${member.description}</p>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="reality-check">
+                    <div class="reality-check-title">${realityCheck.title}</div>
+                    <p class="reality-check-content">${realityCheck.content}</p>
+                </div>
+
+                <div class="possibility-box">
+                    <div class="possibility-title">🤯 What's actually possible now:</div>
+                    <ul class="possibility-list">
+                        ${possibilities.map(p => `<li><span>→</span> ${p}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="workshop-section">
+                    <div class="workshop-title">Build Your AI Dream Team Workshop</div>
+                    <div class="workshop-format">
+                        <div class="format-card">
+                            <div class="format-emoji">🏗️</div>
+                            <div class="format-label">Session 1</div>
+                            <div class="format-title">The Foundation</div>
+                            <div class="format-desc">Build your first GPT + Project</div>
+                        </div>
+                        <div class="format-card">
+                            <div class="format-emoji">🚀</div>
+                            <div class="format-label">Session 2</div>
+                            <div class="format-title">Going Deeper</div>
+                            <div class="format-desc">Connectors, Tasks, Agent Mode</div>
+                        </div>
+                    </div>
+                    <ul class="workshop-includes">
+                        <li>✅ 2 x 2-hour live sessions (not "watch and learn" — you BUILD)</li>
+                        <li>✅ Implementation week with email support between sessions</li>
+                        <li>✅ Lifetime access to replays + Resource Hub</li>
+                        <li>✅ Pre-work bots that train AI on YOUR voice and business</li>
+                    </ul>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">Brooke helped me build a marketing bot that actually sounds like me — and gave me the confidence to post again. I'm getting more engagement, more conversations, and showing up consistently without overthinking.</p>
+                    <p class="testimonial-author">— Samantha, Your Money Home Loans</p>
+                </div>
+
+                <div class="cta-section">
+                    <h3 class="cta-title">Ready to build your AI Dream Team?</h3>
+                    <p class="cta-subtitle">Join the next workshop and finally make AI work for you.</p>
+
+                    <div class="btn-container" style="justify-content: center;">
+                        <a href="https://wrightmode.com/aidreamteam"
+                           target="_blank"
+                           class="btn btn-primary"
+                           style="text-decoration: none; text-align: center; flex: 0; min-width: 220px;">
+                            Join the Workshop →
+                        </a>
+                    </div>
+                    <p class="price-tag">Questions? Reach out at brooke@wrightmode.com</p>
+                </div>
+            `;
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
