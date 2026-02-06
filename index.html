@@ -644,9 +644,9 @@
 
             <!-- Email Capture Screen -->
             <div id="emailScreen" class="hidden">
-                <div class="question-label">✨ Almost there!</div>
+                <div class="question-label">✨ Your results are ready!</div>
                 <h2 class="question-title">Where should I send your results?</h2>
-                <p class="question-subtitle">Enter your email to see your personalised AI Dream Team + get a free resource to help you get started.</p>
+                <p class="question-subtitle">Enter your email to get your AI Dream Team breakdown, your score, and your biggest gap — the one thing to fix this week.</p>
 
                 <div style="margin-bottom: 32px;">
                     <input type="email" id="emailInput" placeholder="your@email.com" style="
@@ -661,7 +661,7 @@
                     <p id="emailError" style="color: #f17a51; font-size: 14px; margin-top: 8px; display: none;">Please enter a valid email address</p>
                 </div>
 
-                <p style="font-size: 13px; color: #666; margin-bottom: 24px; text-align: center;">No spam, ever. Just helpful AI stuff.</p>
+                <p style="font-size: 13px; color: #666; margin-bottom: 24px; text-align: center;">No spam. Just your results + one follow-up email about the workshop.</p>
 
                 <div class="btn-container">
                     <button class="btn btn-secondary" onclick="backToQuestions()">← Back</button>
@@ -710,7 +710,7 @@
                 subtitle: "These are the most common ones I hear.",
                 type: 'single',
                 options: [
-                    { value: 'robotic', label: "It sounds like a robot", description: "Everything it writes is generic and definitely not my voice", emoji: '🤖' },
+                    { value: 'robotic', label: "It sounds generic and impersonal", description: "Everything it writes is generic and definitely not my voice", emoji: '🤖' },
                     { value: 'prompts', label: "I never know what to ask", description: "I spend ages on prompts and still don't get what I need", emoji: '❓' },
                     { value: 'scattered', label: "Nothing sticks", description: "I try tools, get excited, then forget about them", emoji: '🌀' },
                     { value: 'missing', label: "I'm missing something", description: "I know there's more but I don't know what I don't know", emoji: '🤷' }
@@ -733,7 +733,7 @@
                 id: 'mind-blown',
                 label: 'Surprise factor',
                 title: "What would blow your mind if AI could do it?",
-                subtitle: "Some of these are actually possible now...",
+                subtitle: "These might sound impossible. But they're all doable today.",
                 type: 'single',
                 options: [
                     { value: 'log-in', label: 'Log into my apps and DO stuff', description: "Pull analytics, update spreadsheets, run reports automatically", emoji: '🤖' },
@@ -748,43 +748,63 @@
         const teamMembers = {
             contentCreator: {
                 emoji: '✍️',
-                name: 'Content Creator',
-                description: "Creates on-brand posts, emails, and content in YOUR voice — trained on how you actually talk."
+                name: 'Your Content Voice (not the robot)',
+                description: "Writes posts, emails, and everything else that actually sounds like YOU — trained on how you talk, not how AI thinks you should talk."
             },
             businessAdvisor: {
                 emoji: '🧠',
-                name: 'Business Advisor',
-                description: "Your strategic thinking partner. Helps you make decisions, pressure-test ideas, see blind spots."
+                name: 'Your Thinking Partner (without the overwhelm)',
+                description: "Someone to bounce ideas off, pressure-test decisions, and catch blind spots — so you stop second-guessing yourself at 2am."
             },
             emailMarketer: {
                 emoji: '📧',
-                name: 'Email Marketer',
-                description: "Newsletters, welcome sequences, nurture emails — all sounding like you wrote them."
+                name: 'Your Email Writer (that people actually reply to)',
+                description: "Writes newsletters, welcome sequences, and nurture emails that get opened and replied to — because they sound exactly like you."
             },
             clientOnboarding: {
                 emoji: '🤝',
-                name: 'Client Onboarding Assistant',
-                description: "Walks new clients through intake, creates welcome docs, handles the admin you dread."
+                name: 'Your Onboarding Operator (no more manual admin)',
+                description: "Walks new clients through intake, creates welcome docs, handles the admin you dread — so you can focus on delivery."
             },
             cmo: {
                 emoji: '📊',
-                name: 'Chief Marketing Officer',
-                description: "Reviews your marketing strategy, identifies gaps, helps you prioritise what to focus on."
+                name: 'Your Marketing Strategist (minus the overwhelm)',
+                description: "Reviews your strategy, spots the gaps, and helps you prioritise what actually matters — so you stop spinning your wheels."
             },
             leadMagnetGPT: {
                 emoji: '🧲',
-                name: 'Lead Magnet GPT',
-                description: "A quiz, audit, or assessment YOUR audience can use — generates leads while you sleep."
+                name: 'Your Lead Generator (that runs itself)',
+                description: "A quiz, audit, or assessment YOUR audience actually wants to take — generating qualified leads while you sleep."
             },
             sopCreator: {
                 emoji: '📋',
-                name: 'SOP Creator',
-                description: "Record your process once → get step-by-step SOPs you can hand to team or AI agents."
+                name: 'Your Process Documenter (so you can delegate)',
+                description: "Records what you do and turns it into step-by-step instructions your team (or AI) can follow — finally get it out of your head."
             },
             aiAgent: {
                 emoji: '🤖',
-                name: 'AI Agent',
-                description: "Logs into your apps, pulls data, runs reports, updates spreadsheets — on autopilot."
+                name: 'Your Automation Agent (actually does the work)',
+                description: "Logs into your apps, pulls analytics, updates spreadsheets, and runs reports on autopilot — no more manual data wrangling."
+            }
+        };
+
+        // Testimonials mapped to frustration types
+        const testimonials = {
+            robotic: {
+                text: "Brooke helped me build a marketing bot that actually sounds like me — and gave me the confidence to post again. I'm getting more engagement, more conversations, and showing up consistently without overthinking.",
+                author: "Samantha, Your Money Home Loans"
+            },
+            prompts: {
+                text: "I was playing with AI but it was a massive time suck because I didn't have the mindset behind it. The workshop showed me agent mode and the actual difference between projects and GPTs — game changer. Even if you're fairly familiar with AI already, it's worth taking this to fill in the gaps.",
+                author: "Liv Steigrad, The Identity Dept"
+            },
+            scattered: {
+                text: "You have done everything I want to do so why not speed up the process and learn from your experience instead of bookmarking every single video, YouTubing everything, and then spending months trying to piece it together. Might as well learn your strategies and systems and adapt them for myself.",
+                author: "Workshop Participant"
+            },
+            missing: {
+                text: "The whole session set my brain on fire with ideas! I stayed up till 2am that night because my brain was firing wildly. AI is not replacing me — I have invisible team members helping me in every corner of my business. I've cut 10 hours on content creation each week and I'm saving 3 hours per proposal.",
+                author: "Sam Support Co, @samsupport.co"
             }
         };
 
@@ -1036,6 +1056,10 @@
             const realityCheck = getRealityCheck();
             const possibilities = getPossibilities();
 
+            // Get the matching testimonial based on frustration type
+            const frustration = answers['ai-frustration'];
+            const testimonial = testimonials[frustration] || testimonials.robotic;
+
             // Build Flodesk segments array
             const flodeskSegments = [
                 'ai-dream-team-lead',
@@ -1096,44 +1120,55 @@
                 </div>
 
                 <div class="workshop-section">
-                    <div class="workshop-title">Build Your AI Dream Team Workshop</div>
+                    <div class="workshop-title">From Tutorial Hoarding to Systems That Actually Work</div>
                     <div class="workshop-format">
                         <div class="format-card">
-                            <div class="format-emoji">🏗️</div>
+                            <div class="format-emoji">✍️</div>
                             <div class="format-label">Session 1</div>
-                            <div class="format-title">The Foundation</div>
-                            <div class="format-desc">Build your first GPT + Project</div>
+                            <div class="format-title">Train AI That Sounds Like YOU</div>
+                            <div class="format-desc">Stop getting robotic outputs</div>
                         </div>
                         <div class="format-card">
-                            <div class="format-emoji">🚀</div>
+                            <div class="format-emoji">⚡</div>
                             <div class="format-label">Session 2</div>
-                            <div class="format-title">Going Deeper</div>
-                            <div class="format-desc">Connectors, Tasks, Agent Mode</div>
+                            <div class="format-title">Automate What Drains You</div>
+                            <div class="format-desc">Connect AI to your apps and calendar</div>
                         </div>
                     </div>
+
+                    <p style="font-size: 15px; color: #555; margin-bottom: 16px; font-style: italic;">Not "watch and learn" — you'll BUILD systems live.</p>
+
                     <ul class="workshop-includes">
-                        <li>✅ 2 x 2-hour live sessions (not "watch and learn" — you BUILD)</li>
+                        <li>✅ Your first voice-trained GPT (Content Creator or Business Advisor)</li>
+                        <li>✅ A Project that remembers everything about your business</li>
+                        <li>✅ At least one automation that saves you hours this week</li>
                         <li>✅ Implementation week with email support between sessions</li>
                         <li>✅ Lifetime access to replays + Resource Hub</li>
-                        <li>✅ Pre-work bots that train AI on YOUR voice and business</li>
                     </ul>
                 </div>
 
                 <div class="testimonial">
-                    <p class="testimonial-text">Brooke helped me build a marketing bot that actually sounds like me — and gave me the confidence to post again. I'm getting more engagement, more conversations, and showing up consistently without overthinking.</p>
-                    <p class="testimonial-author">— Samantha, Your Money Home Loans</p>
+                    <p class="testimonial-text">${testimonial.text}</p>
+                    <p class="testimonial-author">— ${testimonial.author}</p>
                 </div>
 
                 <div class="cta-section">
-                    <h3 class="cta-title">Ready to build your AI Dream Team?</h3>
-                    <p class="cta-subtitle">Join the next workshop and finally make AI work for you.</p>
+                    <h3 class="cta-title">Ready to Stop Hoarding Tutorials?</h3>
+                    <p class="cta-subtitle">Join the next cohort and build systems that actually work — not in 6 months, this week.</p>
+
+                    <p style="font-size: 14px; color: var(--teal); font-weight: 600; margin-bottom: 16px; text-align: center;">Limited to 12 people per cohort • Next cohort starting soon</p>
+
+                    <p style="font-size: 15px; color: #555; margin-bottom: 20px; text-align: center;">This workshop is for business owners who:<br>
+                    ✅ Know they should be using AI better<br>
+                    ✅ Are tired of generic, robotic outputs<br>
+                    ✅ Want systems, not more scattered tools</p>
 
                     <div class="btn-container" style="justify-content: center;">
                         <a href="https://wrightmode.com/aidreamteam"
                            target="_blank"
                            class="btn btn-primary"
                            style="text-decoration: none; text-align: center; flex: 0; min-width: 220px;">
-                            Join the Workshop →
+                            Secure My Spot →
                         </a>
                     </div>
                     <p class="price-tag">Questions? Reach out at brooke@wrightmode.com</p>
